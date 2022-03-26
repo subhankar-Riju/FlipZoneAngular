@@ -1,0 +1,47 @@
+<div class="div1">
+<div class="container bg-transparent">
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="Form" (ngSubmit)="submitForm()">
+                <div class="form-group" *ngIf="!Islogin">
+                    <label for="firstname" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">First Name</label>
+                    <input type="text" name="firstname" class="form-control" formControlName="firstname">
+                    <span style="color: red;" *ngIf="!Form.get('firstname')?.valid && Form.get('firstname')?.touched">Name required</span>
+
+                </div>
+                <div class="form-group" *ngIf="!Islogin">
+                    <label for="lastname" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">Last Name</label>
+                    <input type="text" name="lastname" class="form-control" formControlName="lastname">
+                    <span style="color: red;" *ngIf="!Form.get('lastname')?.valid && Form.get('lastname')?.touched">Name required</span>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="email" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">Email</label>
+                    <input type="Email" name="email" class="form-control" formControlName="email">
+                    <span style="color: red;" *ngIf="!Form.get('email')?.valid && Form.get('email')?.touched">Correct Email required</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">Password</label>
+                    <input type="Password" name="password" class="form-control" formControlName="password">
+                    <span style="color: red;" *ngIf="!Form.get('password')?.valid && Form.get('password')?.touched">Enter Password</span>
+                </div>
+                <div class="form-group" *ngIf="!Islogin">
+                    <label for="c_password" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">Confirm Password</label>
+                    <input type="Password" name="c_password" class="form-control" formControlName="c_password">
+                    <span style="color: red;"  *ngIf="!Form.get('c_password')?.valid && Form.get('c_password')?.touched">Enter same Password</span>
+                </div>
+               
+                
+                <br>
+                <div>
+                    <button type="submit" style="margin-right: 20px;" class="btn btn-primary">{{!Islogin ? 'SignUp':'Login'}}</button>    |
+                    <button type="button" style="margin-left: 20px;" class="btn btn-primary" (click)="Switch_btn_fun()">{{Islogin ? 'Switch to SignUp':'Switch to Login'}}</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,16 @@
+.form-group:hover {
+  transform: scale(1.1);
+}
+.form-control {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bolder;
+}
+
+.container {
+  padding-top: 30px;
+  width: 32%;
+}
+.div1 {
+  background-image: url("https://images.ctfassets.net/a68ipajj4t9l/kOdP0EblrkRWNiNjMjSzG/f463c006f8f34c09e71039afc3caf752/Panorama___ingvellir-NL-02_Fix.jpg?w=2400&q=60");
+  background-repeat: no-repeat;
+}

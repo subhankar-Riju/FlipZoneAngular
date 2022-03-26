@@ -1,0 +1,10 @@
+#login_btn {
+  color: rgb(241, 181, 193);
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  border-radius: 10px;
+  border: 1px;
+}
+
+#login_btn :hover {
+  transform: scale(1.4);
+}

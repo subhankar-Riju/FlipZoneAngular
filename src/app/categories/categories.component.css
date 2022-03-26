@@ -1,0 +1,28 @@
+#Laptop,
+#Mobile,
+#Tablet {
+  margin-top: 90px;
+  height: 300px;
+}
+#Laptop:hover {
+  transform: scale(1.2);
+}
+
+#Mobile:hover {
+  transform: scale(1.2);
+}
+#Tablet:hover {
+  transform: scale(1.2);
+}
+
+#Laptop {
+  background-color: aqua;
+}
+
+#Tablet {
+  background-color: rgb(124, 245, 245);
+}
+
+#Mobile {
+  background-color: rgb(198, 240, 240);
+}
