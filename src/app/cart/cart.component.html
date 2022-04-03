@@ -1,0 +1,36 @@
+
+
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm" style="padding: 0px 30px 30px 0px;background-color:rgb(206, 169, 240)">
+        
+      </div>
+      <div class="col-sm" style="padding: 0px 30px 30px 0px;">
+          <div *ngFor="let I of Items;let i=index">
+        <div class="card" id="Tablet" >
+            <img src="../../../assets/images/Mobiles/{{I.p_id}}.jpg" style="height: 200px;"
+             class="card-img-top" alt="...">
+            <div class="card-body" style="background-color: rgb(125, 245, 229);">
+              <h5 class="card-title">Model :{{I.model}}</h5>
+              <h5>Brand: {{I.brand}}</h5>
+              <h6>Price : {{I["price"]}}</h6>
+              <a href="#" class="btn btn-primary" style="margin-left: 12px;">Buy</a>
+              <a href="#" class="btn btn-primary" style="margin-left: 10px;">Delete from cart</a>
+
+              <div class="container" style="margin-top: 4px;margin-left:20px">
+                <input type="button" (click)="decrementValue(I)" value="-" style="background-color: rgb(248, 173, 164);"/>
+                <input style="text-align: center;" type="text" name="quantity" value="{{I.quantity}}" disabled="true" maxlength="2" max="10" size="1" id="number" />
+                <input type="button" (click)="IncrementValue(I)" value="+" style="background-color: rgb(164, 248, 182);"/>
+                </div>
+            </div>
+          </div>
+        
+          
+        </div>      
+    </div>
+      <div class="col-sm" style="padding: 0px 30px 30px 0px;background-color:rgb(170, 188, 243)" >
+        
+    </div>
+  </div>

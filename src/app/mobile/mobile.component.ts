@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BuyService } from '../services/buy.service';
 import { MobileService } from '../services/mobile.service';
 
 @Component({
@@ -8,17 +10,34 @@ import { MobileService } from '../services/mobile.service';
 })
 export class MobileComponent implements OnInit {
 
-  constructor(private mobileService:MobileService) { }
+  Mobiles:any[]=[];
+  Data:any;
+  // imgUrl='../../../assets/images/';
+  // temp_imgUrl={
+  //   "Nord2":"../../../assets/images/Nord2.jpg"
+  // };
+  constructor(private mobileService:MobileService,private buyService:BuyService,
+    private router:Router) { }
 
   ngOnInit(): void {
 
     this.mobileService.GetMobiles()
-    .subscribe(data=>{
-      //this.mobileService.maxCursor=data['count'];
-      console.log(data);
-      
-    })
+    .subscribe(data1=>{
+     // this.mobileService.maxCursor=data1.count;
+     this.Data=data1;
+     this.Mobiles=this.Data.data;
+      console.log(this.Mobiles);
+      //console.log();
 
+    });
+    
+}
+
+  Buy(mob:any){
+    this.buyService.buyFromCategory=mob;
+    this.router.navigate(['/buy']);
   }
 
 }
+
+

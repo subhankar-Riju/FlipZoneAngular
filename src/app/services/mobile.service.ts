@@ -6,7 +6,7 @@ import { Injectable, OnInit } from '@angular/core';
 })
 export class MobileService implements OnInit{
 
-  count=5;
+  count=10;
   cursor=0;
   maxCursor=0;
 
@@ -16,7 +16,6 @@ export class MobileService implements OnInit{
 
   GetMobiles(){
     return this.http.get("https://localhost:5001/api/Mobile/GetMobiles/"+this.count+"/"+this.cursor);
-
   }
 
 }

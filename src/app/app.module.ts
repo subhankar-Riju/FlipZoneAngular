@@ -11,6 +11,8 @@ import { SignuploginComponent } from './signuplogin/signuplogin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MobileComponent } from './mobile/mobile.component';
 import { MobileService } from './services/mobile.service';
+import { CartComponent } from './cart/cart.component';
+import { BuyComponent } from './buy/buy.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { MobileService } from './services/mobile.service';
     CategoriesComponent,
     HomeComponent,
     SignuploginComponent,
-    MobileComponent
+    MobileComponent,
+    CartComponent,
+    BuyComponent
   ],
   imports: [
     BrowserModule,

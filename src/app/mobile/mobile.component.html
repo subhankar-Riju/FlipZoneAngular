@@ -1,1 +1,35 @@
-<p>mobile works!</p>
+<!-- <div *ngFor="let m of Mobiles">
+    <p>{{m['model']}}</p>
+    <p>{{m['price']}}</p>
+    <p>{{m}}</p>
+</div> -->
+
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm" style="padding: 0px 30px 30px 0px;background-color:rgb(206, 169, 240)">
+        
+      </div>
+      <div class="col-sm" style="padding: 0px 30px 30px 0px;">
+          <div *ngFor="let m of Mobiles;let i=index">
+        <div class="card" id="Tablet" >
+            <img src="../../../assets/images/Mobiles/{{m.p_id}}.jpg" style="height: 200px;"
+             class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Model :{{m.model}}</h5>
+              <h5>Brand: {{m.brand}}</h5>
+              <h6>Price : {{m["price"]}}</h6>
+              <button class="btn btn-primary">Add to cart</button>
+              <button class="btn btn-primary" (click)="Buy(m)">Buy</button>
+
+            </div>
+          </div>
+        
+          
+        </div>      
+    </div>
+      <div class="col-sm" style="padding: 0px 30px 30px 0px;background-color:rgb(170, 188, 243)" >
+        
+    </div>
+  </div>
