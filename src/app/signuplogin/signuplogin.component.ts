@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class SignuploginComponent implements OnInit {
   name!:string;
   Data:[]=[];
   Login!:any;
-  constructor(private account:AccountService) { }
+  constructor(private account:AccountService,private route:Router) { }
 
   submitForm(){
     if(this.Islogin){
@@ -25,11 +26,19 @@ export class SignuploginComponent implements OnInit {
         email:this.Form.get('email')?.value,
         password:this.Form.get('password')?.value
       };
+      
 
       this.account.Login(body).subscribe(data1=>{
-        console.log(data1);
         this.Login=data1;
         this.Data=this.Login.data;
+        this.account.Token=this.Login.token;
+        this.account.IsLogin=true;
+        console.log(this.account.IsLogin);
+
+        //emmitting this event for parent component
+        this.account.Loginstatus_parent.emit(this.Islogin);
+        
+        
         for(let x of this.Data){
           this.account.Logged_firstname=x['firstname'];
           this.account.Logged_lastname=x["lastname"];
@@ -38,7 +47,11 @@ export class SignuploginComponent implements OnInit {
         // console.log(this.account.Logged_email);
         // console.log( this.account.Logged_lastname);
         // console.log( this.account.Logged_firstname);
+        this.route.navigate(['/']);
         
+        },
+        (err)=>{
+          this.account.IsLogin=false;
         });
 
     }

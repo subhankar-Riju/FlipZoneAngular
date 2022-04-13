@@ -29,7 +29,8 @@ import { BuyComponent } from './buy/buy.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [AccountService,MobileService],
   bootstrap: [AppComponent]

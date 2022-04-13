@@ -1,37 +1,70 @@
 <div class="container bg-transparent">
     <div class="row">
         <div class="col-md-12">
-            <form >
-                <div class="form-group">
-                    <label for="firstname" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">First Name</label>
-                    <input type="text" name="firstname" class="form-control" formControlName="firstname">
+            <form [formGroup]="FormAddr" >
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="firstname" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">First Name</label>
+                        <input type="text" name="firstname" class="form-control" formControlName="firstname" readonly>
 
+                    </div>
+                    <div class="form-group col" >
+                        <label for="lastname" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">Last Name</label>
+                        <input type="text" name="lastname" class="form-control" formControlName="lastname" readonly>
+
+                    </div>
+            </div>
+
+                <div class="row">
+
+                    <div class="form-group col">
+                        <label for="email" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">Email</label>
+                        <input type="Email" name="email" class="form-control" formControlName="email" readonly>
+                    </div>
+
+                    <div class="form-group col">
+                        <label for="mobile" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">Mobile</label>
+                        <input type="tel" name="mobile" class="form-control" formControlName="mobile">
+                    </div>
                 </div>
+
                 <div class="form-group" >
-                    <label for="lastname" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">Last Name</label>
-                    <input type="text" name="lastname" class="form-control" formControlName="lastname">
+                    <label for="address" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">Address</label>
+                    <textarea class="form-control" id="address"  formControlName="address" rows="1"></textarea>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="city" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">City/Village/Town</label>
+                        <input type="text" name="city" class="form-control" formControlName="city">
+                    </div>
+
+                    <div class="form-group col">
+                        <label for="district" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">District</label>
+                        <input type="text" name="mobile" class="form-control" formControlName="district">
+                    </div>
 
                 </div>
 
-                <div class="form-group">
-                    <label for="email" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">Email</label>
-                    <input type="Email" name="email" class="form-control" formControlName="email">
+                <div class="row">
+                    <div class="form-group col" >
+                        <label for="country" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">Country</label>
+                        <input type="text" name="country" class="form-control" formControlName="country" readonly value="India">
+                    </div>
+
+                    <div class="form-group col" >
+                        <label for="pin" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">PIN</label>
+                        <input type="number" name="pin" class="form-control" formControlName="pin">
+                    </div>
+
                 </div>
 
-                <div class="form-group">
-                    <label for="mobile" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">Mobile</label>
-                    <input type="tel" name="mobile" class="form-control" formControlName="mobile">
-                </div>
 
-                <div class="form-group" >
-                    <label for="address" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">PIN</label>
-                    <textarea class="form-control" id="address" rows="3"></textarea>
-                </div>
 
-                <div class="form-group" >
-                    <label for="pin" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">PIN</label>
-                    <input type="number" name="pin" class="form-control" formControlName="pin">
-                </div>
+
+
+
+                
                
                 
                 <br>

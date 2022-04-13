@@ -1,3 +1,4 @@
-.container bg-transparent{
-    height: 10px;
+.container{
+    width: 50%;
+    padding-top: 30px;
 }

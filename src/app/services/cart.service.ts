@@ -33,4 +33,16 @@ export class CartService {
       
     });
   }
+
+  DeleteFromCart(email:string,p_id:string){
+    return this.http.delete("https://localhost:5001/deleteFromcart/"+email+"/"+p_id);
+    
+  }
+
+  AddToCart(body:any){
+    return this.http.post("https://localhost:5001/AddToCart",body);
+    
+  }
+
+
 }

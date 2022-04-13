@@ -20,10 +20,14 @@
               <!-- <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a> -->
           </div>
           <div class="navbar-nav ms-auto">
-              <a [routerLink]="['/signuplogin']"
+            <a>Hey,{{Islogin}}</a>
+        </div>
+          <div class="navbar-nav ms-auto">
+              <!-- <a [routerLink]="['/signuplogin']"
               routerLinkActive="active"
-              [routerLinkActiveOptions]="{exact:true}" id="login_btn" class="nav-item nav-link">Login</a>
-          </div>
+              [routerLinkActiveOptions]="{exact:true}" id="login_btn" class="nav-item nav-link">Login</a> -->
+          <button (click)="LoginOrout()">{{Islogin ? 'Logout' : 'Login'}}</button>
+        </div>
       </div>
   </div>
 </nav>

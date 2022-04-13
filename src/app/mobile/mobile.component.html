@@ -7,9 +7,37 @@
 
 
 <div class="container">
+  
+
     <div class="row">
       <div class="col-sm" style="padding: 0px 30px 30px 0px;background-color:rgb(206, 169, 240)">
         
+        <div class="input-group" style="width:300px;margin-top:20px;margin-bottom:30px">
+          <div class="form-outline">
+            <input id="search-input" type="search" placeholder="Search brand or Model" id="form1" class="form-control" [(ngModel)]="searchData"/>
+          </div>
+          <button id="search-button" (click)="SearchOn()" type="button" class="btn btn-primary" style="width: 70px;">
+              Search
+          </button>
+        </div>
+
+
+
+        <label for="cars">Choose filter:</label>
+        <select name="filter" id="cars" [(ngModel)]="filterUsed" (ngModelChange)="filterChange($event)">
+          <option value="">Default</option>
+          <option value="rating">Rating</option>
+          <option value="price">Price</option>
+        </select>
+
+        <select name="filter" id="fill" style="margin-left: 5px;" [(ngModel)]="innerfillter" >
+          <option value="{{i}}" *ngFor="let i of filterArray">{{i}}</option>
+         
+        </select>
+        <button (click)="applyfilter()" style="margin-left: 5px;">{{innerfillter=="default" ? "Reset" :"Apply"}}</button>
+
+
+
       </div>
       <div class="col-sm" style="padding: 0px 30px 30px 0px;">
           <div *ngFor="let m of Mobiles;let i=index">
@@ -20,7 +48,7 @@
               <h5 class="card-title">Model :{{m.model}}</h5>
               <h5>Brand: {{m.brand}}</h5>
               <h6>Price : {{m["price"]}}</h6>
-              <button class="btn btn-primary">Add to cart</button>
+              <button class="btn btn-primary" (click)="AddToCart(m)">Add to cart</button>
               <button class="btn btn-primary" (click)="Buy(m)">Buy</button>
 
             </div>
