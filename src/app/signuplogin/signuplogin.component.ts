@@ -39,8 +39,10 @@ export class SignuploginComponent implements OnInit {
         this.account.Loginstatus_parent.emit(this.Islogin);
         
         
+        
         for(let x of this.Data){
           this.account.Logged_firstname=x['firstname'];
+          this.account.Loginname_parent.emit(x['firstname']);
           this.account.Logged_lastname=x["lastname"];
           this.account.Logged_email=x["email"]          
         }

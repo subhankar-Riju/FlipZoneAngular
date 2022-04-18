@@ -20,7 +20,7 @@
               <!-- <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a> -->
           </div>
           <div class="navbar-nav ms-auto">
-            <a>Hey,{{Islogin}}</a>
+            <a *ngIf="Islogin">Hey, {{name}}</a>
         </div>
           <div class="navbar-nav ms-auto">
               <!-- <a [routerLink]="['/signuplogin']"

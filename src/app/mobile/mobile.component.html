@@ -23,7 +23,7 @@
 
 
 
-        <label for="cars">Choose filter:</label>
+        <label for="cars">Filter:</label>
         <select name="filter" id="cars" [(ngModel)]="filterUsed" (ngModelChange)="filterChange($event)">
           <option value="">Default</option>
           <option value="rating">Rating</option>
@@ -34,7 +34,7 @@
           <option value="{{i}}" *ngFor="let i of filterArray">{{i}}</option>
          
         </select>
-        <button (click)="applyfilter()" style="margin-left: 5px;">{{innerfillter=="default" ? "Reset" :"Apply"}}</button>
+        <button (click)="applyfilter()" style="margin-left: 5px;">{{Reset ? "Reset" : "Apply"}}</button>
 
 
 
@@ -47,8 +47,9 @@
             <div class="card-body">
               <h5 class="card-title">Model :{{m.model}}</h5>
               <h5>Brand: {{m.brand}}</h5>
-              <h6>Price : {{m["price"]}}</h6>
-              <button class="btn btn-primary" (click)="AddToCart(m)">Add to cart</button>
+              <h6>Price : {{m["price"]}}/- Rs.</h6>
+              <h6>Rating : {{m.rating}}</h6>
+              <button class="btn btn-primary" (click)="AddToCart(m)">Add to cart</button> |
               <button class="btn btn-primary" (click)="Buy(m)">Buy</button>
 
             </div>

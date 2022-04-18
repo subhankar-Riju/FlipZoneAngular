@@ -24,8 +24,11 @@ export class AppComponent implements OnInit{
 
   constructor(private router:Router,private account:AccountService){}
   ngOnInit(): void {
-    this.name=this.account.Logged_firstname;
-    this.Islogin=this.account.IsLogin;
+    //this.name=this.account.Logged_firstname;
+    //this.Islogin=this.account.IsLogin;
+    this.account.Loginname_parent.subscribe(data=>{
+      this.name=data;
+    })
 
     this.account.Loginstatus_parent.subscribe(data=>{
       this.Islogin=data;

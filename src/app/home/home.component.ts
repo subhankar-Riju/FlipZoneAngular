@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,12 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  IsLogin!:boolean;
+
+  constructor(private router:Router,private account:AccountService) { }
 
   ngOnInit(): void {
+    this.IsLogin=this.account.IsLogin;
   }
 
   Signuplogin(){

@@ -58,10 +58,17 @@ export class CartComponent implements OnInit {
     .subscribe(data=>{
       console.log(data);
       if(data==1){
-        
+        this.cart.GetcartItems()
+        .subscribe(data=>{
+          this.vari=data;
+          this.Items=this.vari.record;
+          this.totalPrice=this.vari.totalPrice;
+          
+        });
       }
     });
     
+   
     
   }
 

@@ -14,9 +14,11 @@ export class MobileComponent implements OnInit {
 
   Mobiles:any[]=[];
   Data:any;
+  Reset=false;
   searchData!:string;
   filterUsed:string="";
-  ratingArray:string[]=["default","rating < 2","rating > 4","rating 3 To 4"];
+  ratingArray:string[]=["rating < 2","rating > 4","rating 3 To 4"];
+  priceArray:string[]=["price < 30k","price 30k to 60k","price 60k to 90k","price > 90k"]
   filterArray!:string[];
   innerfillter:string="";
   
@@ -43,7 +45,9 @@ export class MobileComponent implements OnInit {
 }
 
   Buy(mob:any){
-    this.buyService.buyFromCategory=mob;
+    //this.buyService.buyFromCategory=mob;
+    mob.quantity=1;
+    this.buyService.singleBuy=mob;
     this.router.navigate(['/buy']);
   }
 
@@ -89,24 +93,39 @@ export class MobileComponent implements OnInit {
     if(this.filterUsed=="rating"){
         this.filterArray=this.ratingArray;
     }
-    else{
+    if(this.filterUsed=="price"){
+      this.filterArray=this.priceArray;
+    }
+    if(this.filterUsed==""){
       this.filterArray=[];
+      this.Reset=true;
     }
     
   }
 
   //apply the filter
   applyfilter(){
+    this.Reset=false;
     //"rating < 2","rating > 4","rating 3 To 4"
     if(this.innerfillter=="rating < 2"){
         this.mobileService.bodyGetMobiles.filterRatinglt2=1;
         this.mobileService.bodyGetMobiles.filterRatinggt4=0;
         this.mobileService.bodyGetMobiles.filterRating3t4=0;
+
+        this.mobileService.bodyGetMobiles.filterPrice30t60=0;
+        this.mobileService.bodyGetMobiles.filterPrice60t90=0;
+        this.mobileService.bodyGetMobiles.filterPricegt90=0;
+        this.mobileService.bodyGetMobiles.filterPricelt30=0;
     }
     if(this.innerfillter=="rating > 4"){
       this.mobileService.bodyGetMobiles.filterRatinggt4=1;
       this.mobileService.bodyGetMobiles.filterRating3t4=0;
       this.mobileService.bodyGetMobiles.filterRatinglt2=0;
+
+      this.mobileService.bodyGetMobiles.filterPrice30t60=0;
+      this.mobileService.bodyGetMobiles.filterPrice60t90=0;
+      this.mobileService.bodyGetMobiles.filterPricegt90=0;
+      this.mobileService.bodyGetMobiles.filterPricelt30=0;
       console.log(">4");
       
     }
@@ -114,9 +133,59 @@ export class MobileComponent implements OnInit {
       this.mobileService.bodyGetMobiles.filterRating3t4=1;
       this.mobileService.bodyGetMobiles.filterRatinglt2=0;
       this.mobileService.bodyGetMobiles.filterRatinggt4=0;
+
+      this.mobileService.bodyGetMobiles.filterPrice30t60=0;
+      this.mobileService.bodyGetMobiles.filterPrice60t90=0;
+      this.mobileService.bodyGetMobiles.filterPricegt90=0;
+      this.mobileService.bodyGetMobiles.filterPricelt30=0;
       console.log("3to4");
       
     }
+
+    //price < 30k","price 30k to 60k","price 60k to 90k","price > 90k
+
+    if(this.innerfillter=="price < 30k"){
+      this.mobileService.bodyGetMobiles.filterRating3t4=0;
+      this.mobileService.bodyGetMobiles.filterRatinglt2=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
+
+      this.mobileService.bodyGetMobiles.filterPrice30t60=0;
+      this.mobileService.bodyGetMobiles.filterPrice60t90=0;
+      this.mobileService.bodyGetMobiles.filterPricegt90=0;
+      this.mobileService.bodyGetMobiles.filterPricelt30=1;
+    }
+
+    if(this.innerfillter=="price 30k to 60k"){
+      this.mobileService.bodyGetMobiles.filterRating3t4=0;
+      this.mobileService.bodyGetMobiles.filterRatinglt2=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
+
+      this.mobileService.bodyGetMobiles.filterPrice30t60=1;
+      this.mobileService.bodyGetMobiles.filterPrice60t90=0;
+      this.mobileService.bodyGetMobiles.filterPricegt90=0;
+      this.mobileService.bodyGetMobiles.filterPricelt30=0;
+    }
+    if(this.innerfillter=="price 60k to 90k"){
+      this.mobileService.bodyGetMobiles.filterRating3t4=0;
+      this.mobileService.bodyGetMobiles.filterRatinglt2=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
+
+      this.mobileService.bodyGetMobiles.filterPrice30t60=0;
+      this.mobileService.bodyGetMobiles.filterPrice60t90=1;
+      this.mobileService.bodyGetMobiles.filterPricegt90=0;
+      this.mobileService.bodyGetMobiles.filterPricelt30=0;
+    }
+    if(this.innerfillter=="price > 90k"){
+      this.mobileService.bodyGetMobiles.filterRating3t4=0;
+      this.mobileService.bodyGetMobiles.filterRatinglt2=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
+
+      this.mobileService.bodyGetMobiles.filterPrice30t60=0;
+      this.mobileService.bodyGetMobiles.filterPrice60t90=0;
+      this.mobileService.bodyGetMobiles.filterPricegt90=1;
+      this.mobileService.bodyGetMobiles.filterPricelt30=0;
+    }
+
     this.mobileService.GetMobiles()
     .subscribe((data1)=>{
      this.Data=data1;

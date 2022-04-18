@@ -1,4 +1,9 @@
+
+
 <div class="container bg-transparent">
+    <div class="row" style="font-style: oblique;">
+        Delivery Address:
+    </div>
     <div class="row">
         <div class="col-md-12">
             <form [formGroup]="FormAddr" >
@@ -24,7 +29,7 @@
 
                     <div class="form-group col">
                         <label for="mobile" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: black;font-weight: 700">Mobile</label>
-                        <input type="tel" name="mobile" class="form-control" formControlName="mobile">
+                        <input type="tel" name="mobile" class="form-control" formControlName="mobile" >
                     </div>
                 </div>
 
@@ -69,11 +74,63 @@
                 
                 <br>
                 <div>
-                    <button type="submit" style="margin-right: 20px;" class="btn btn-primary">Button</button>    |
-                    <!-- <button type="button" style="margin-left: 20px;" class="btn btn-primary" (click)="Switch_btn_fun()">{{Islogin ? 'Switch to SignUp':'Switch to Login'}}</button> -->
+                    <button (click)="Edit()" *ngIf="!saveinit" style="margin-right: 20px;" class="btn btn-primary">Edit</button>    |
+                    <button type="button"  style="margin-left: 20px;" class="btn btn-primary" (click)="Save()">Save</button>
 
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+
+
+
+
+<br>
+<div class="container">
+
+<div class="row" style="font-style: oblique;">
+    Billing Details:
+</div>
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Brand</th>
+        <th scope="col">Model</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let m of buyArray">
+      <tr>
+        <td>{{m.brand}}</td>
+        <td>{{m.model}}</td>
+        <td>{{m.quantity}}</td>
+        <td>{{m.price}}</td>
+      </tr>
+     
+    </tbody>
+  </table>
+</div>
+  <div class="container">
+      <div class="row">
+          <h5>Grand Total: {{grandTotal}}/-</h5>
+      </div>
+      <div class="row">
+          <button (click)="PlaceOrder()">Place order</button>
+      </div>
+  </div>
+
+
+
+
+
+
+
+    
+      
+
+
+

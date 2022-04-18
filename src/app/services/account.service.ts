@@ -12,6 +12,7 @@ export class AccountService {
   IsLogin=false;
 
   Loginstatus_parent=new EventEmitter<boolean>();
+  Loginname_parent=new EventEmitter<string>();
 
 
   constructor(private http:HttpClient) { }
