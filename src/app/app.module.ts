@@ -13,6 +13,7 @@ import { MobileComponent } from './mobile/mobile.component';
 import { MobileService } from './services/mobile.service';
 import { CartComponent } from './cart/cart.component';
 import { BuyComponent } from './buy/buy.component';
+import { HistoryComponent } from './history/history.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { BuyComponent } from './buy/buy.component';
     SignuploginComponent,
     MobileComponent,
     CartComponent,
-    BuyComponent
+    BuyComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,

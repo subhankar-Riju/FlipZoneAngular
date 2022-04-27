@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { BuyService } from '../services/buy.service';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -13,43 +14,56 @@ export class CartComponent implements OnInit {
   totalPrice:any;
   deletedFromCart!:number;
 
-  constructor(private cart:CartService,private router:Router) { }
+  constructor(private cart:CartService,private router:Router,private buy:BuyService) { }
   
 
   ngOnInit(): void {
-    this.cart.GetcartItems()
-    .subscribe(data=>{
-      this.vari=data;
-      this.Items=this.vari.record;
-      this.totalPrice=this.vari.totalPrice;
-      
-    })
+    this.GetCartItems();
     //this.Items=this.cart.Items;
+  }
+  GetCartItems(){
+    this.cart.GetcartItems()
+     .subscribe(data=>{
+       console.log(data);
+       
+       this.vari=data;
+       this.Items=this.vari.record;
+       this.totalPrice=this.vari.totalPrice;
+       
+     });
   }
 
   IncrementValue(I:any){
-   this.cart.incrementItem(I);
-   console.log("incremented");
-   this.Items.forEach(element => {
-     if(element.email==I.email && element.p_id==I.p_id){
-       element.quantity=++I.quantity;
-       this.totalPrice+=I.price;
-     }
+   this.cart.incrementItem(I)
+   .subscribe(data=>{
+     console.log(data);
+     //
+     this.GetCartItems();
+     //
+     
    });
+   console.log("increment clicked");
+   
+  
+  //  console.log("incremented");
+  //  this.Items.forEach(element => {
+  //    if(element.email==I.email && element.p_id==I.p_id){
+  //      element.quantity=++I.quantity;
+  //      this.totalPrice+=I.price;
+  //    }
+  //  });
    //this.Items[0].quantity=++I.quantity;
     
   }
 
   decrementValue(I:any){
     if(I.quantity>1){
-    this.cart.decrementItem(I);
-   console.log("incremented");
-   this.Items.forEach(element => {
-     if(element.email==I.email && element.p_id==I.p_id){
-       element.quantity=--I.quantity;
-       this.totalPrice-=I.price;
-     }
-   });
+    this.cart.decrementItem(I)
+    .subscribe(data=>{
+      this.GetCartItems();
+    })
+   console.log("decremented");
+   
   }
   }
 
@@ -70,6 +84,17 @@ export class CartComponent implements OnInit {
     
    
     
+  }
+
+  BuyAll(){
+    this.buy.buyFromCart=true;
+    this.router.navigate(['/buy']);
+  }
+
+  Buy(mob:any){
+    mob.quantity=1;
+    this.buy.singleBuy=mob;
+    this.router.navigate(['/buy']);
   }
 
 }

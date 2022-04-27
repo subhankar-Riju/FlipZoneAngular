@@ -14,7 +14,7 @@
         
         <div class="input-group" style="width:300px;margin-top:20px;margin-bottom:30px">
           <div class="form-outline">
-            <input id="search-input" type="search" placeholder="Search brand or Model" id="form1" class="form-control" [(ngModel)]="searchData"/>
+            <input id="search-input" type="search" placeholder="Search brand or Model" id="form1" class="form-control" [(ngModel)]="mobileService.bodyGetMobiles.searchMobile"/>
           </div>
           <button id="search-button" (click)="SearchOn()" type="button" class="btn btn-primary" style="width: 70px;">
               Search

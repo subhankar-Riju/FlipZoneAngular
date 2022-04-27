@@ -18,7 +18,10 @@
               routerLinkActive="active"
               [routerLinkActiveOptions]="{exact:true}" class="nav-item nav-link text-dark">cart</a>
               <!-- <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a> -->
-          </div>
+              <a [routerLink]="['/history']"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact:true}" class="nav-item nav-link text-dark">History</a>
+            </div>
           <div class="navbar-nav ms-auto">
             <a *ngIf="Islogin">Hey, {{name}}</a>
         </div>

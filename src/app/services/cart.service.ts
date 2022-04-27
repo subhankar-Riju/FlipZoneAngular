@@ -15,23 +15,17 @@ export class CartService {
 
   GetcartItems(){
     return this.http
-    .get("https://localhost:5001/GetCartItems/Riju@gmail/"+this.count+"/"+this.cursor);
+    .get("https://localhost:5001/GetCartItems/"+this.account.Logged_email+"/"+this.count+"/"+this.cursor);
     }
 
   incrementItem(body:any){
-    this.http.post("https://localhost:5001/incrementqantity/1",body)
-    .subscribe(data=>{
-      console.log("+1");
-      
-    });
+    return this.http.post("https://localhost:5001/incrementqantity/1",body);
+    
   }
 
   decrementItem(body:any){
-    this.http.post("https://localhost:5001/incrementqantity/-1",body)
-    .subscribe(data=>{
-      console.log("-1");
-      
-    });
+    return this.http.post("https://localhost:5001/incrementqantity/-1",body);
+    
   }
 
   DeleteFromCart(email:string,p_id:string){

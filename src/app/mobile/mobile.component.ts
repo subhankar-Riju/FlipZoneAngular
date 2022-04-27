@@ -23,7 +23,7 @@ export class MobileComponent implements OnInit {
   innerfillter:string="";
   
 
-  constructor(private mobileService:MobileService,private buyService:BuyService,
+  constructor(public mobileService:MobileService,private buyService:BuyService,
     private cart:CartService,
     private router:Router) { }
 
@@ -74,7 +74,7 @@ export class MobileComponent implements OnInit {
   }
 
   SearchOn(){
-    this.mobileService.bodyGetMobiles.searchMobile=this.searchData;
+    //this.mobileService.bodyGetMobiles.searchMobile=this.searchData;
     this.mobileService.GetMobiles()
     .subscribe((data1)=>{
      this.Data=data1;
@@ -99,12 +99,32 @@ export class MobileComponent implements OnInit {
     if(this.filterUsed==""){
       this.filterArray=[];
       this.Reset=true;
+      console.log("Reset true");
+      
+
+
+    
     }
     
   }
 
   //apply the filter
   applyfilter(){
+    
+    if(this.Reset){
+      console.log("Reset exc");
+      
+      this.mobileService.bodyGetMobiles.filterRatinglt2=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
+      this.mobileService.bodyGetMobiles.filterRating3t4=0;
+
+      this.mobileService.bodyGetMobiles.filterPrice30t60=0;
+      this.mobileService.bodyGetMobiles.filterPrice60t90=0;
+      this.mobileService.bodyGetMobiles.filterPricegt90=0;
+      this.mobileService.bodyGetMobiles.filterPricelt30=0;
+      this.innerfillter="";
+     // this.GetMobiles();
+    }
     this.Reset=false;
     //"rating < 2","rating > 4","rating 3 To 4"
     if(this.innerfillter=="rating < 2"){
@@ -186,8 +206,14 @@ export class MobileComponent implements OnInit {
       this.mobileService.bodyGetMobiles.filterPricelt30=0;
     }
 
+    this.GetMobiles();
+   
+
+  }
+
+  GetMobiles(){
     this.mobileService.GetMobiles()
-    .subscribe((data1)=>{
+    .subscribe(data1=>{
      this.Data=data1;
      this.Mobiles=this.Data.data;
       console.log(this.Mobiles);
@@ -196,7 +222,6 @@ export class MobileComponent implements OnInit {
       console.log(err.status);
       
     });
-
   }
 
  

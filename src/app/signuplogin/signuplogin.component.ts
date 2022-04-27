@@ -54,6 +54,7 @@ export class SignuploginComponent implements OnInit {
         },
         (err)=>{
           this.account.IsLogin=false;
+          alert("Username or Password incorrect");
         });
 
     }

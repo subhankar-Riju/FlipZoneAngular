@@ -16,7 +16,7 @@
               <h5 class="card-title">Model :{{I.model}}</h5>
               <h5>Brand: {{I.brand}}</h5>
               <h6>Price : {{I["price"]}}</h6>
-              <button class="btn btn-primary" style="margin-left: 12px;">Buy</button>
+              <button class="btn btn-primary" style="margin-left: 12px;" (click)="Buy(I)">Buy</button>
               <button (click)="DelFromCart(I)" class="btn btn-primary" style="margin-left: 10px;">Delete from cart</button>
 
               <div class="container" style="margin-top: 4px;margin-left:20px">
@@ -32,5 +32,6 @@
     </div>
       <div class="col-sm" style="padding: 0px 30px 30px 0px;background-color:rgb(170, 188, 243)" >
         <h6>Total Cart value Rs.{{totalPrice}}</h6>
+        <button (click)="BuyAll()">Buy All Items</button>
     </div>
   </div>
