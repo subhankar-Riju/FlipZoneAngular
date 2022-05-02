@@ -12,6 +12,8 @@ import { MobileService } from '../services/mobile.service';
 })
 export class MobileComponent implements OnInit {
 
+  n_rating=1;
+  SortUsed!:string;
   Mobiles:any[]=[];
   Data:any;
   Reset=false;
@@ -21,6 +23,8 @@ export class MobileComponent implements OnInit {
   priceArray:string[]=["price < 30k","price 30k to 60k","price 60k to 90k","price > 90k"]
   filterArray!:string[];
   innerfillter:string="";
+
+  maxPage=0;
   
 
   constructor(public mobileService:MobileService,private buyService:BuyService,
@@ -28,14 +32,24 @@ export class MobileComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit(): void {
+
+    this.mobileService.count=2;
+    this.mobileService.cursor=0;
     
     this.mobileService.GetMobiles()
     .subscribe((data1)=>{
-     // this.mobileService.maxCursor=data1.count;
+      console.log(data1);
+      
      this.Data=data1;
-     this.Mobiles=this.Data.data;
-      console.log(this.Mobiles);
-      //console.log();
+     this.mobileService.maxCursor=this.Data.count;
+     this.Mobiles=this.Data.record;
+     // console.log(this.Mobiles);
+      this.maxPage=Math.ceil(this.mobileService.maxCursor/this.mobileService.count);
+      // console.log("max page" + this.maxPage);
+      // console.log(this.mobileService.count);
+      // console.log(this.mobileService.maxCursor);
+      
+      
     },
     (err)=>{
       console.log(err.status);
@@ -75,16 +89,9 @@ export class MobileComponent implements OnInit {
 
   SearchOn(){
     //this.mobileService.bodyGetMobiles.searchMobile=this.searchData;
-    this.mobileService.GetMobiles()
-    .subscribe((data1)=>{
-     this.Data=data1;
-     this.Mobiles=this.Data.data;
-      console.log(this.Mobiles);
-    },
-    (err)=>{
-      console.log(err.status);
-      
-    });
+    this.mobileService.cursor=0;
+    this.mobileService.count=2;
+    this.GetMobiles();
   }
 
 //filter on rating or price
@@ -206,17 +213,41 @@ export class MobileComponent implements OnInit {
       this.mobileService.bodyGetMobiles.filterPricelt30=0;
     }
 
+    this.mobileService.count=2;
+    this.mobileService.cursor=0;
     this.GetMobiles();
    
 
   }
 
+  PrevPage(){
+    if(this.mobileService.cursor >0){
+      this.mobileService.cursor--;
+      this.GetMobiles();
+    }
+
+    
+
+  }
+
+  NextPage(){
+    if(this.maxPage-2 != this.mobileService.cursor-1){
+      this.mobileService.cursor++;
+      this.GetMobiles();
+    }
+   // this.GetMobiles();
+  }
+
   GetMobiles(){
     this.mobileService.GetMobiles()
     .subscribe(data1=>{
-     this.Data=data1;
-     this.Mobiles=this.Data.data;
-      console.log(this.Mobiles);
+      console.log(data1);
+      
+      this.Data=data1;
+      this.mobileService.maxCursor=this.Data.count;
+      this.Mobiles=this.Data.record;
+      // console.log(this.Mobiles);
+       this.maxPage=Math.ceil(this.mobileService.maxCursor/this.mobileService.count);
     },
     (err)=>{
       console.log(err.status);
@@ -224,6 +255,16 @@ export class MobileComponent implements OnInit {
     });
   }
 
+  SortChange(event:Event){
+
+  }
+
+  //////////////////////---------start change----------------
+
+  Rating_radio(event:Event){
+    console.log(this.n_rating);
+    
+  }
  
 }
 

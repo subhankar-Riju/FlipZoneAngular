@@ -1,6 +1,7 @@
 <table class="table">
     <thead class="thead-dark">
       <tr>
+        
         <th scope="col">Brand</th>
         <th scope="col">Model</th>
         <th scope="col">Quantity</th>
@@ -8,14 +9,19 @@
         <th scope="col">Date</th>
       </tr>
     </thead>
-    <tbody *ngFor="let m of histArray">
+    <tbody *ngFor="let m of histArray;let i=index">
       <tr>
+        
         <td>{{m.brand}}</td>
         <td>{{m.model}}</td>
         <td>{{m.quantity}}</td>
         <td>{{m.price}}</td>
         <td>{{m.dateTime}}</td>
+        <!-- <td><button (click)="BuyAgain(m)">Buy Again</button></td> -->
       </tr>
      
     </tbody>
   </table>
+
+  <button (click)="PrevPage()">Previous</button> |
+  <button (click)="NextPage()">Next</button>

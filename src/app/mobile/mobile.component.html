@@ -6,11 +6,16 @@
 
 
 
-<div class="container">
+<div class="outer_div">
+
+  <div class="d-flex justify-content-between">
+    <button (click)="PrevPage()"  class="float-start">Previous</button> 
+    <button (click)="NextPage()"  class="float-end">Next</button>
+  </div>
   
 
     <div class="row">
-      <div class="col-sm" style="padding: 0px 30px 30px 0px;background-color:rgb(206, 169, 240)">
+      <div class="col-lg-3" >
         
         <div class="input-group" style="width:300px;margin-top:20px;margin-bottom:30px">
           <div class="form-outline">
@@ -37,9 +42,62 @@
         <button (click)="applyfilter()" style="margin-left: 5px;">{{Reset ? "Reset" : "Apply"}}</button>
 
 
+        <label for="cars">Sort By:</label>
+        <select name="filter" id="cars" [(ngModel)]="SortUsed" (ngModelChange)="SortChange($event)">
+          <option value="">Default</option>
+          <option value="asending">Asending/option>
+          <option value="desending">Desending</option>
+        </select>
+
+        <!--     start modify  -->
+
+        <div>
+          <h6>Customer Ratings</h6>
+          <div class="form-check" >
+            <input class="form-check-input"
+             (change)="Rating_radio($event)" type="radio"
+              name="flexRadioDefault"
+              value="4"
+              [(ngModel)]="n_rating" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              4 and above
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input"
+             (change)="Rating_radio($event)"
+              type="radio" name="flexRadioDefault"
+              value="3"
+              [(ngModel)]="n_rating" id="flexRadioDefault2" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+              3 and above
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input"
+             (change)="Rating_radio($event)"
+              type="radio" name="flexRadioDefault"
+              value="2"
+              [(ngModel)]="n_rating" id="flexRadioDefault2" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+              2 and above
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input"
+             (change)="Rating_radio($event)"
+              type="radio" name="flexRadioDefault"
+              value="1"
+              [(ngModel)]="n_rating" id="flexRadioDefault2" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+              1 and above
+            </label>
+          </div>
+        </div>
+
 
       </div>
-      <div class="col-sm" style="padding: 0px 30px 30px 0px;">
+      <div class="col-lg-9" style="padding: 0px 30px 30px 0px;">
           <div *ngFor="let m of Mobiles;let i=index">
         <div class="card" id="Tablet" >
             <img src="../../../assets/images/Mobiles/{{m.p_id}}.jpg" style="height: 200px;"
@@ -58,7 +116,5 @@
           
         </div>      
     </div>
-      <div class="col-sm" style="padding: 0px 30px 30px 0px;background-color:rgb(170, 188, 243)" >
-        
-    </div>
+    
   </div>

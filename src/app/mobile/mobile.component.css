@@ -3,3 +3,22 @@
   width: 300px;
   margin-left: 30px;
 }
+
+
+.col-lg-3{
+  padding: 0px 30px 30px 10px;
+  border-right: 3px dotted rgb(148, 154, 238);
+}
+.outer_div{
+  padding-left: 9px;
+  padding-right: 9px;
+
+}
+
+#btn_next{
+  margin-right: 4px;
+}
+
+#btn_prev{
+  margin-left: 4px;
+}
