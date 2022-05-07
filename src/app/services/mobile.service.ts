@@ -13,12 +13,12 @@ export class MobileService implements OnInit{
   bodyGetMobiles={
         searchMobile:'',
         filterRatinggt4:0, 
-        filterRatinglt2:0, 
-        filterRating3t4:0, 
-        filterPricegt90:0, 
-        filterPricelt30 :0,
-        filterPrice30t60 :0,
-        filterPrice60t90:0, 
+        filterRatinggt3:0, 
+        filterRatinggt2:0, 
+        filterRatinggt1:0, 
+
+        filtermaxPrice:200000,
+        filterminPrice:0, 
         sortByPrice :-1,
         sortByRating:0, 
   }

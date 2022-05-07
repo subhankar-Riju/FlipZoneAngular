@@ -1,18 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
 import { BuyService } from '../services/buy.service';
 import { CartService } from '../services/cart.service';
 import { MobileService } from '../services/mobile.service';
+import { SingleMobileService } from '../services/single-mobile.service';
 
 @Component({
   selector: 'app-mobile',
   templateUrl: './mobile.component.html',
   styleUrls: ['./mobile.component.css']
 })
-export class MobileComponent implements OnInit {
+export class MobileComponent implements OnInit,AfterViewInit {
+
+  @ViewChild('btn_p_LH') btn_PLTH !:ElementRef;
+  @ViewChild('btn_p_HL') btn_PHTL !:ElementRef;
+  @ViewChild('btn_r_LH') btn_RLTH !:ElementRef;
+  @ViewChild('btn_r_HL') btn_RHTL !:ElementRef;
+
+  ngAfterViewInit(): void {
+    this.btn_PLTH.nativeElement.onclick=()=>{
+      
+      
+    }
+    console.log(this.btn_PLTH);
+    
+  }
 
   n_rating=1;
+  n_priceminfilter=0;
+  n_pricemaxfilter:number=200000;
+  n_price:number[]=[200000,150000,110000,90000,70000,50000,40000,30000,20000,10000];
+  upperArray:Array<number>=[200000,150000,110000,90000,70000,50000,40000,30000,20000,10000];
   SortUsed!:string;
   Mobiles:any[]=[];
   Data:any;
@@ -28,10 +47,12 @@ export class MobileComponent implements OnInit {
   
 
   constructor(public mobileService:MobileService,private buyService:BuyService,
-    private cart:CartService,
+    private cart:CartService,private singlemob:SingleMobileService,
     private router:Router) { }
 
   ngOnInit(): void {
+
+    //this.btn_PHTL.nativeElement.setAttribute('style', 'background: rgb(100, 142, 248)');
 
     this.mobileService.count=2;
     this.mobileService.cursor=0;
@@ -87,6 +108,15 @@ export class MobileComponent implements OnInit {
     });
   }
 
+  SingleMobile(mob:any){
+    this.singlemob.singleMobInit(mob);
+
+    this.router.navigate(['/singleMobile']);
+   
+   
+    
+  }
+
   SearchOn(){
     //this.mobileService.bodyGetMobiles.searchMobile=this.searchData;
     this.mobileService.cursor=0;
@@ -115,111 +145,7 @@ export class MobileComponent implements OnInit {
     
   }
 
-  //apply the filter
-  applyfilter(){
-    
-    if(this.Reset){
-      console.log("Reset exc");
-      
-      this.mobileService.bodyGetMobiles.filterRatinglt2=0;
-      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
-      this.mobileService.bodyGetMobiles.filterRating3t4=0;
-
-      this.mobileService.bodyGetMobiles.filterPrice30t60=0;
-      this.mobileService.bodyGetMobiles.filterPrice60t90=0;
-      this.mobileService.bodyGetMobiles.filterPricegt90=0;
-      this.mobileService.bodyGetMobiles.filterPricelt30=0;
-      this.innerfillter="";
-     // this.GetMobiles();
-    }
-    this.Reset=false;
-    //"rating < 2","rating > 4","rating 3 To 4"
-    if(this.innerfillter=="rating < 2"){
-        this.mobileService.bodyGetMobiles.filterRatinglt2=1;
-        this.mobileService.bodyGetMobiles.filterRatinggt4=0;
-        this.mobileService.bodyGetMobiles.filterRating3t4=0;
-
-        this.mobileService.bodyGetMobiles.filterPrice30t60=0;
-        this.mobileService.bodyGetMobiles.filterPrice60t90=0;
-        this.mobileService.bodyGetMobiles.filterPricegt90=0;
-        this.mobileService.bodyGetMobiles.filterPricelt30=0;
-    }
-    if(this.innerfillter=="rating > 4"){
-      this.mobileService.bodyGetMobiles.filterRatinggt4=1;
-      this.mobileService.bodyGetMobiles.filterRating3t4=0;
-      this.mobileService.bodyGetMobiles.filterRatinglt2=0;
-
-      this.mobileService.bodyGetMobiles.filterPrice30t60=0;
-      this.mobileService.bodyGetMobiles.filterPrice60t90=0;
-      this.mobileService.bodyGetMobiles.filterPricegt90=0;
-      this.mobileService.bodyGetMobiles.filterPricelt30=0;
-      console.log(">4");
-      
-    }
-    if(this.innerfillter=="rating 3 To 4"){
-      this.mobileService.bodyGetMobiles.filterRating3t4=1;
-      this.mobileService.bodyGetMobiles.filterRatinglt2=0;
-      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
-
-      this.mobileService.bodyGetMobiles.filterPrice30t60=0;
-      this.mobileService.bodyGetMobiles.filterPrice60t90=0;
-      this.mobileService.bodyGetMobiles.filterPricegt90=0;
-      this.mobileService.bodyGetMobiles.filterPricelt30=0;
-      console.log("3to4");
-      
-    }
-
-    //price < 30k","price 30k to 60k","price 60k to 90k","price > 90k
-
-    if(this.innerfillter=="price < 30k"){
-      this.mobileService.bodyGetMobiles.filterRating3t4=0;
-      this.mobileService.bodyGetMobiles.filterRatinglt2=0;
-      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
-
-      this.mobileService.bodyGetMobiles.filterPrice30t60=0;
-      this.mobileService.bodyGetMobiles.filterPrice60t90=0;
-      this.mobileService.bodyGetMobiles.filterPricegt90=0;
-      this.mobileService.bodyGetMobiles.filterPricelt30=1;
-    }
-
-    if(this.innerfillter=="price 30k to 60k"){
-      this.mobileService.bodyGetMobiles.filterRating3t4=0;
-      this.mobileService.bodyGetMobiles.filterRatinglt2=0;
-      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
-
-      this.mobileService.bodyGetMobiles.filterPrice30t60=1;
-      this.mobileService.bodyGetMobiles.filterPrice60t90=0;
-      this.mobileService.bodyGetMobiles.filterPricegt90=0;
-      this.mobileService.bodyGetMobiles.filterPricelt30=0;
-    }
-    if(this.innerfillter=="price 60k to 90k"){
-      this.mobileService.bodyGetMobiles.filterRating3t4=0;
-      this.mobileService.bodyGetMobiles.filterRatinglt2=0;
-      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
-
-      this.mobileService.bodyGetMobiles.filterPrice30t60=0;
-      this.mobileService.bodyGetMobiles.filterPrice60t90=1;
-      this.mobileService.bodyGetMobiles.filterPricegt90=0;
-      this.mobileService.bodyGetMobiles.filterPricelt30=0;
-    }
-    if(this.innerfillter=="price > 90k"){
-      this.mobileService.bodyGetMobiles.filterRating3t4=0;
-      this.mobileService.bodyGetMobiles.filterRatinglt2=0;
-      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
-
-      this.mobileService.bodyGetMobiles.filterPrice30t60=0;
-      this.mobileService.bodyGetMobiles.filterPrice60t90=0;
-      this.mobileService.bodyGetMobiles.filterPricegt90=1;
-      this.mobileService.bodyGetMobiles.filterPricelt30=0;
-    }
-
-    this.mobileService.count=2;
-    this.mobileService.cursor=0;
-    this.GetMobiles();
-   
-
-  }
-
+  
   PrevPage(){
     if(this.mobileService.cursor >0){
       this.mobileService.cursor--;
@@ -263,7 +189,112 @@ export class MobileComponent implements OnInit {
 
   Rating_radio(event:Event){
     console.log(this.n_rating);
+    if(this.n_rating==1){
+      this.mobileService.bodyGetMobiles.filterRatinggt1=1;
+      this.mobileService.bodyGetMobiles.filterRatinggt2=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt3=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
+    }
+    if(this.n_rating==2){
+      this.mobileService.bodyGetMobiles.filterRatinggt1=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt2=1;
+      this.mobileService.bodyGetMobiles.filterRatinggt3=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
+    }
+    if(this.n_rating==3){
+      this.mobileService.bodyGetMobiles.filterRatinggt1=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt2=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt3=1;
+      this.mobileService.bodyGetMobiles.filterRatinggt4=0;
+    }
+    if(this.n_rating==4){
+      this.mobileService.bodyGetMobiles.filterRatinggt1=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt2=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt3=0;
+      this.mobileService.bodyGetMobiles.filterRatinggt4=1;
+    }
+    this.mobileService.cursor=0;
     
+    this.GetMobiles();
+  }
+
+  Price_select(event:Event){
+      console.log(this.n_priceminfilter);
+      
+      this.upperArray=[];
+        for(let i of this.n_price){
+            if(i > this.n_priceminfilter){
+              this.upperArray.push(i);
+            }
+        }
+        this.n_pricemaxfilter=this.upperArray[0];
+        //console.log(this.upperArray);
+        
+
+        this.mobileService.bodyGetMobiles.filterminPrice=this.n_priceminfilter;
+        console.log("max "+ this.mobileService.bodyGetMobiles.filtermaxPrice);
+        console.log("min "+ this.mobileService.bodyGetMobiles.filterminPrice);
+        
+        this.GetMobiles();
+        
+        
+  }
+
+  Price_select2(event:Event){
+    this.mobileService.bodyGetMobiles.filtermaxPrice=this.n_pricemaxfilter;
+    console.log("max "+ this.mobileService.bodyGetMobiles.filtermaxPrice);
+
+    this.GetMobiles();
+  }
+
+  click_PLTH(){
+    this.btn_PLTH.nativeElement.setAttribute('style', 'background: rgb(100, 142, 248);border-radius: 40px');
+    this.btn_PHTL.nativeElement.setAttribute('style', 'background: transparent');
+    this.btn_RHTL.nativeElement.setAttribute('style', 'background: transparent');
+    this.btn_RLTH.nativeElement.setAttribute('style', 'background: transparent');
+
+    this.mobileService.bodyGetMobiles.sortByPrice=1;
+    this.mobileService.bodyGetMobiles.sortByRating=0;
+    this.mobileService.cursor=0;
+    this.GetMobiles();
+    
+  }
+
+  click_PHTL(){
+    this.btn_PHTL.nativeElement.setAttribute('style', 'background: rgb(100, 142, 248);border-radius: 40px');
+    this.btn_PLTH.nativeElement.setAttribute('style', 'background: transparent');
+    this.btn_RHTL.nativeElement.setAttribute('style', 'background: transparent');
+    this.btn_RLTH.nativeElement.setAttribute('style', 'background: transparent');
+
+    this.mobileService.bodyGetMobiles.sortByPrice=-1;
+    this.mobileService.bodyGetMobiles.sortByRating=0;
+    this.mobileService.cursor=0;
+    this.GetMobiles();
+
+  }
+
+  click_RHTL(){
+    this.btn_RHTL.nativeElement.setAttribute('style', 'background: rgb(100, 142, 248);border-radius: 40px');
+    this.btn_PLTH.nativeElement.setAttribute('style', 'background: transparent');
+    this.btn_RLTH.nativeElement.setAttribute('style', 'background: transparent');
+    this.btn_PHTL.nativeElement.setAttribute('style', 'background: transparent');
+
+    this.mobileService.bodyGetMobiles.sortByPrice=0;
+    this.mobileService.bodyGetMobiles.sortByRating=-1;
+    this.mobileService.cursor=0;
+    this.GetMobiles();
+  }
+
+  click_RLTH(){
+    this.btn_PHTL.nativeElement.setAttribute('style', 'background: transparent');
+    this.btn_PLTH.nativeElement.setAttribute('style', 'background: transparent');
+    this.btn_RHTL.nativeElement.setAttribute('style', 'background: transparent');
+    this.btn_RLTH.nativeElement.setAttribute('style', 'background: rgb(100, 142, 248);border-radius: 40px');
+
+    this.mobileService.bodyGetMobiles.sortByPrice=0;
+    this.mobileService.bodyGetMobiles.sortByRating=1;
+    this.mobileService.cursor=0;
+    this.GetMobiles();
   }
  
 }

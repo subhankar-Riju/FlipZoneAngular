@@ -8,14 +8,19 @@
 
 <div class="outer_div">
 
-  <div class="d-flex justify-content-between">
+  <!-- <div class="d-flex justify-content-between" >
     <button (click)="PrevPage()"  class="float-start">Previous</button> 
     <button (click)="NextPage()"  class="float-end">Next</button>
+  </div> -->
+  <div class="row">
+
+    
+
   </div>
   
 
     <div class="row">
-      <div class="col-lg-3" >
+      <div class="col-lg-3 filters" >
         
         <div class="input-group" style="width:300px;margin-top:20px;margin-bottom:30px">
           <div class="form-outline">
@@ -27,8 +32,8 @@
         </div>
 
 
-
-        <label for="cars">Filter:</label>
+<!---    comment from here-->
+        <!-- <label for="cars">Filter:</label>
         <select name="filter" id="cars" [(ngModel)]="filterUsed" (ngModelChange)="filterChange($event)">
           <option value="">Default</option>
           <option value="rating">Rating</option>
@@ -39,7 +44,7 @@
           <option value="{{i}}" *ngFor="let i of filterArray">{{i}}</option>
          
         </select>
-        <button (click)="applyfilter()" style="margin-left: 5px;">{{Reset ? "Reset" : "Apply"}}</button>
+        <button  style="margin-left: 5px;">{{Reset ? "Reset" : "Apply"}}</button>
 
 
         <label for="cars">Sort By:</label>
@@ -51,8 +56,16 @@
 
         <!--     start modify  -->
 
-        <div>
-          <h6>Customer Ratings</h6>
+        <div class="rating_filter">
+          <div class="row">
+            <div class="col-sm-8">
+              <h6>Customer Ratings</h6>
+            </div>
+            <div class="col-sm-2">
+              <button class="bg-transparent btn_clear_sec">clear</button>
+            </div>
+
+          </div>
           <div class="form-check" >
             <input class="form-check-input"
              (change)="Rating_radio($event)" type="radio"
@@ -60,7 +73,7 @@
               value="4"
               [(ngModel)]="n_rating" id="flexRadioDefault1">
             <label class="form-check-label" for="flexRadioDefault1">
-              4 and above
+              4★ & above
             </label>
           </div>
           <div class="form-check">
@@ -70,7 +83,7 @@
               value="3"
               [(ngModel)]="n_rating" id="flexRadioDefault2" checked>
             <label class="form-check-label" for="flexRadioDefault2">
-              3 and above
+              3★ & above
             </label>
           </div>
           <div class="form-check">
@@ -80,7 +93,7 @@
               value="2"
               [(ngModel)]="n_rating" id="flexRadioDefault2" checked>
             <label class="form-check-label" for="flexRadioDefault2">
-              2 and above
+              2★ & above
             </label>
           </div>
           <div class="form-check">
@@ -90,31 +103,145 @@
               value="1"
               [(ngModel)]="n_rating" id="flexRadioDefault2" checked>
             <label class="form-check-label" for="flexRadioDefault2">
-              1 and above
+              1★ & above
             </label>
           </div>
-        </div>
-
-
-      </div>
-      <div class="col-lg-9" style="padding: 0px 30px 30px 0px;">
-          <div *ngFor="let m of Mobiles;let i=index">
-        <div class="card" id="Tablet" >
-            <img src="../../../assets/images/Mobiles/{{m.p_id}}.jpg" style="height: 200px;"
-             class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Model :{{m.model}}</h5>
-              <h5>Brand: {{m.brand}}</h5>
-              <h6>Price : {{m["price"]}}/- Rs.</h6>
-              <h6>Rating : {{m.rating}}</h6>
-              <button class="btn btn-primary" (click)="AddToCart(m)">Add to cart</button> |
-              <button class="btn btn-primary" (click)="Buy(m)">Buy</button>
-
-            </div>
-          </div>
+        </div> 
         
+        <!-- Price   fillter -->
+        
+        <div class="price_filter">
+          <div class="row" style="margin-bottom: 10px;">
+            <div class="col-sm-8">
+              <h6>Select Price Range</h6>
+            </div>
+            <div class="col-sm-2">
+                <button  class="bg-transparent btn_clear_sec">clear</button>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <select class=" "
+              aria-label=".form-select-sm example"
+              [(ngModel)]="n_priceminfilter"  (ngModelChange)="Price_select($event)"
+              >
+                <option selected value="0" >₹0</option>
+                <option value="10000" > ₹10000</option>
+                <option value="20000" >₹20000</option>
+                <option value="30000" >₹30000</option>
+                <option value="40000" >₹40000</option>
+                <option value="50000" >₹50000</option>
+                <option value="70000" >₹70000</option>
+                <option value="90000" >₹90000</option>
+              </select>
+            </div>
+            <div class="col-sm-2">
+              <p>to</p>
+            </div>  
+            <div class="col-sm-4">
+              <select class=""
+              aria-label=".form-select-sm example"
+              [(ngModel)]="n_pricemaxfilter"
+              (ngModelChange)="Price_select($event)"
+              >
+              
+                <option 
+                value="{{i}}" *ngFor="let i of upperArray" >₹{{i}}</option>
+              
+              </select>
+            </div>
+        </div>
+      </div>
+       
+
+    </div>
+        <!-----------------       end     ---------------->
+
+
+      
+      <div class="col-lg-9 elements">
+         <div class="row sort">
+           <div class="col-lg-2">
+              <h6 id="h6_sortby">Sort By :</h6>
+           </div>
+           <div class="col-lg-2">
+            <button #btn_p_LH (click)="click_PLTH()" class="btn_sort " id="plth">Price--Low to High</button>
+          </div>
+          <div class="col-lg-2">
+            <button #btn_p_HL (click)="click_PHTL()" class="btn_sort " id="phtl">Price--High to Low</button>
+          </div>
+          <div class="col-lg-2">
+            <button #btn_r_LH (click)="click_RLTH()" class="btn_sort " id="rlth">Rating--Low to High</button>
+          </div>
+          <div class="col-lg-2">
+            <button #btn_r_HL (click)="click_RHTL()" class="btn_sort " id="rhtl">Rating--High to Low</button>
+          </div>
+
+         </div>
+         
+           <!--     prev logic    -->
+          <!-- <div *ngFor="let m of Mobiles;let i=index">
+            <div class="card" id="Tablet" >
+                <img src="../../../assets/images/Mobiles/{{m.p_id}}.jpg" style="height: 200px;"
+                 class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Model :{{m.model}}</h5>
+                  <h5>Brand: {{m.brand}}</h5>
+                  <h6>Price : {{m["price"]}}/- Rs.</h6>
+                  <h6>Rating : {{m.rating}}</h6>
+                  <button class="btn btn-primary" (click)="AddToCart(m)">Add to cart</button> |
+                  <button class="btn btn-primary" (click)="Buy(m)">Buy</button>
+    
+                </div>
+              </div>
+            </div> -->
+
+             <!--     prev logic  end    -->
+             
+             <div class="card" *ngFor="let m of Mobiles;let i=index"  >
+               <button class='row bg-transparent' (click)="SingleMobile(m)" style="border: none;" >
+               <div class="col" >
+              <img src="../../../assets/images/Mobiles/{{m.p_id}}.jpg"
+              style="height:300px;width:300px"
+               class="card-img-top" alt="...">
+            </div>
+            <div class="col" >
+              
+              <div class="row">
+              <h5 style="font-weight:600;margin-bottom:50px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">{{m.brand}} {{m.model}}</h5>
+              </div>
+              <ul>
+            <li>
+              <div class="row" style="font-weight:bold;margin-left:4px;margin-bottom:10px;background-color: rgb(148, 110, 12);width:fit-content;height:27px;color:white;border-radius: 40px;">
+                <p>{{m.rating}} ★</p>
+              </div>
+            </li>
+            <li>
+              <div class="row" style="font-weight:800;margin-left:4px;font-family:sans-serif">
+                <h6>₹{{m.price}}/-</h6>
+              </div>
+            </li>
+            </ul>
+            <div class="row" style="font-family:'Courier New', Courier, monospace">
+              <h4 style="background-color: rgb(14, 169, 58);width:fit-content;border-radius: 30px;font-weight:700">Free delivery</h4>
+            </div>
+            <ul>
+            <li>
+            <div class="row" style="font-family: Arial, Helvetica, sans-serif;">
+              <h6>Upto 20% off on exchange</h6>
+            </div></li>
+            <li>
+              <div class="row" style="font-family: Arial, Helvetica, sans-serif;">
+                <h6>special offer on credit card</h6>
+              </div>
+            </li>
+          </ul>
+            </div>
+          </button>
+            </div>
           
-        </div>      
+            
     </div>
     
   </div>

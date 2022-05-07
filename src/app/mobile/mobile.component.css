@@ -1,13 +1,63 @@
 .card {
-  margin-top: 30px;
-  width: 300px;
-  margin-left: 30px;
+  margin: 50px;
+  width: 900px;
+  padding: 30px;
+  
+}
+
+.card a{
+  text-decoration: none;
+  color: black;
+}
+
+/* .card {
+  flex-direction: row;
+  width:fit-content;
+} */
+
+.outer_card{
+  width: 1000px;
 }
 
 
-.col-lg-3{
-  padding: 0px 30px 30px 10px;
-  border-right: 3px dotted rgb(148, 154, 238);
+
+
+.card {
+  margin-left: 20px;
+  margin-top: 20px;
+  padding:20px;
+  flex-direction: row;
+  width: max-content;
+ 
+}
+
+
+
+
+#phtl{
+  background: rgb(100, 142, 248);
+  border-radius: 40px;
+}
+
+
+
+.sort{
+  background-color: rgb(214, 249, 249);
+  border-bottom: 2px solid rgb(28, 42, 234);
+  border-top: 2px solid rgb(28, 42, 234);
+  border-left:2px solid rgb(28, 42, 234) ;
+  
+}
+
+.filters{
+  margin-top: 10px;
+  
+  border-right: 3px solid rgb(28, 42, 234);
+  border-top: 2px solid rgb(28, 42, 234);
+}
+
+.elements{
+  padding: 10px 30px 30px 10px;
 }
 .outer_div{
   padding-left: 9px;
@@ -22,3 +72,38 @@
 #btn_prev{
   margin-left: 4px;
 }
+
+.rating_filter{
+  border-bottom: 2px solid black;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  align-content: center;
+}
+.price_filter{
+  border-bottom: 2px solid black;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  align-content: center;
+  
+  
+}
+
+
+.btn_clear_sec{
+  border: none;
+  color: blue;
+}
+
+#h6_sortby{
+  padding-left: 10px;
+}
+
+.btn_sort{
+  font-size: 12px;
+  border: none;
+  background: transparent;
+  
+}
+
+
+

@@ -7,6 +7,7 @@ import { HistoryComponent } from './history/history.component';
 import { HomeComponent } from './home/home.component';
 import { MobileComponent } from './mobile/mobile.component';
 import { SignuploginComponent } from './signuplogin/signuplogin.component';
+import { SingleMobileComponent } from './single-mobile/single-mobile.component';
 
 const routes: Routes = [
   {path:'categories',component:CategoriesComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:'mobiles',component:MobileComponent},
   {path:'cart',component:CartComponent},
   {path:'buy',component:BuyComponent},
-  {path:'history',component:HistoryComponent}
+  {path:'history',component:HistoryComponent},
+  {path:'singleMobile',component:SingleMobileComponent}
 ];
 
 @NgModule({

@@ -14,6 +14,13 @@ import { MobileService } from './services/mobile.service';
 import { CartComponent } from './cart/cart.component';
 import { BuyComponent } from './buy/buy.component';
 import { HistoryComponent } from './history/history.component';
+import { CartService } from './services/cart.service';
+import { BuyService } from './services/buy.service';
+import { HistoryService } from './services/history.service';
+import { SingleMobileService } from './services/single-mobile.service';
+import { SingleMobileComponent } from './single-mobile/single-mobile.component';
+
+
 
 
 @NgModule({
@@ -25,7 +32,8 @@ import { HistoryComponent } from './history/history.component';
     MobileComponent,
     CartComponent,
     BuyComponent,
-    HistoryComponent
+    HistoryComponent,
+    SingleMobileComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +42,7 @@ import { HistoryComponent } from './history/history.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [AccountService,MobileService],
+  providers: [AccountService,MobileService,CartService,BuyService,HistoryService,SingleMobileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
